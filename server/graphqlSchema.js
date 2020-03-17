@@ -7,53 +7,10 @@ const {
   GraphQLBoolean,
   GraphQLObjectType
 } = require('graphql');
-//Imports
 
-//Root Mutation
-const Mutation = new GraphQLObjectType({
-  name: 'Mutation',
-  fields: {
-    addTask: {
-      args: {
-        name: { type: GraphQLString },
-        openedBy: { type: GraphQLString },
-        description: { type: GraphQLString },
-        status: { type: GraphQLString },
-        isOpen: { type: GraphQLBoolean }
-      },
-      resolve(parent, args) {}
-    },
-    openTask: {
-      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
-      resolve(parent, args) {}
-    },
-    closeTask: {
-      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
-      resolve(parent, args) {}
-    },
-    changeTaskStatus: {
-      args: {
-        id: { type: new GraphQLNonNull(GraphQLString) },
-        status: { type: GraphQLString }
-      },
-      resolve(parent, args) {}
-    },
-    openIssue: {
-      args: {
-        name: { type: GraphQLString },
-        taskId: { type: GraphQLID },
-        description: { type: GraphQLString },
-        isOpen: { type: GraphQLBoolean }
-      },
-      resolve(parent, args) {}
-    },
-    closeIssue: {
-      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
-      resolve(parent, args) {}
-    },
-    clearAllTasks: { resolve(parent, args) {} }
-  }
-});
+//Imports
+const Task = require('./mongodb/TaskSchema');
+const Issue = require('./mongodb/IssueSchema');
 
 //Task Query
 const TaskQuery = new GraphQLObjectType({
@@ -65,7 +22,12 @@ const TaskQuery = new GraphQLObjectType({
     description: { type: GraphQLString },
     status: { type: GraphQLString },
     isOpen: { type: GraphQLBoolean },
-    issues: { type: new GraphQLList(IssueQuery), resolve(parent, args) {} }
+    issues: {
+      type: new GraphQLList(IssueQuery),
+      resolve(parent, args) {
+        return Issue.find({ taskId: parent.id });
+      }
+    }
   })
 });
 
@@ -78,7 +40,12 @@ const IssueQuery = new GraphQLObjectType({
     taskId: { type: GraphQLID },
     description: { type: GraphQLString },
     isOpen: { type: GraphQLBoolean },
-    task: { type: TaskQuery, resolve(parent, args) {} }
+    task: {
+      type: new GraphQLList(TaskQuery),
+      resolve(parent, args) {
+        return Task.find({ _id: parent.taskId });
+      }
+    }
   })
 });
 
@@ -88,24 +55,116 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     tasks: {
       type: new GraphQLList(TaskQuery),
-      resolve(parent, args) {}
+      resolve(parent, args) {
+        return Task.find();
+      }
     },
     task: {
       type: TaskQuery,
-      args: { Id: new GraphQLNonNull(GraphQLID) },
-      resolve(parent, args) {}
+      args: { Id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(parent, args) {
+        return Task.find({ id: args.id });
+      }
     },
     issues: {
       type: new GraphQLList(IssueQuery),
-      resolve(parent, args) {}
+      resolve(parent, args) {
+        return Issue.find();
+      }
     },
     issue: {
       type: IssueQuery,
-      args: { id: new GraphQLNonNull(GraphQLID) },
-      resolve(parent, args) {}
+      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(parent, args) {
+        return Issue.find({ id: args.id });
+      }
+    }
+  }
+});
+
+//Root Mutation
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    //Add new Task
+    openTask: {
+      type: TaskQuery,
+      args: {
+        name: { type: GraphQLString },
+        openedBy: { type: GraphQLString },
+        description: { type: GraphQLString },
+        status: { type: GraphQLString },
+        isOpen: { type: GraphQLBoolean }
+      },
+      resolve(parent, args) {
+        const { name, openedBy, status, isOpen, description } = args;
+        let newTask = new Task({
+          name,
+          description,
+          openedBy,
+          isOpen,
+          status
+        });
+
+        return newTask.save();
+      }
+    },
+
+    //Close a task
+    closeTask: {
+      type: TaskQuery,
+      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(parent, args) {
+        return Task.updateOne(
+          { _id: args.id },
+          { $set: { isOpen: false } }
+        );
+      }
+    },
+
+    //Move from one column to another
+    changeTaskStatus: {
+      type: TaskQuery,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) },
+        status: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parent, args) {
+        console.log(args.id)
+        return Task.updateOne(
+          { _id: args.id },
+          { $set: { status: args.status } }
+        );
+      }
+    },
+    openIssue: {
+      type: IssueQuery,
+      args: {
+        name: { type: GraphQLString },
+        taskId: { type: GraphQLString },
+        description: { type: GraphQLString },
+        isOpen: { type: GraphQLBoolean }
+      },
+      resolve(parent, args) {
+        const { name, description, isOpen, taskId } = args;
+        const newIssue = new Issue({
+          name,
+          description,
+          isOpen,
+          taskId
+        });
+        return newIssue.save();
+      }
+    },
+    closeIssue: {
+      type: IssueQuery,
+      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(parent, args) {
+        Issue.updateOne({ _id: args.id }, { $set: { isOpen: false } });
+      }
     }
   }
 });
 
 //Exports
-module.exports = new GraphQLSchema({ query: RootQuery });
+module.exports = new GraphQLSchema({ query: RootQuery, mutation: Mutation });

@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const expressGQL = require('express-graphql');
+const expressGraphQl = require('express-graphql');
 const GraphQlSchema = require('./graphqlSchema');
 require('dotenv/config');
 
@@ -20,10 +20,9 @@ mongoose.connect(
 );
 
 //GraphQL Route
-app.use('/graphql',expressGQL({graphiql:true,GraphQlSchema}))
-
+app.use('/graphql', expressGraphQl({ graphiql: true, schema: GraphQlSchema }));
 
 //Starting the server
 app.listen(PORT, () => {
-  console.log('Server Started');
+  console.log('Server Started port:' + PORT);
 });
