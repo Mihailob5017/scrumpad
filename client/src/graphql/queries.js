@@ -17,3 +17,16 @@ export const GET_TASKS_QUERY = gql`
     }
   }
 `;
+
+export const CHANGE_TASK_STATUS = gql`
+  mutation ChangeTaskStatus($id: String!, $status: String!) {
+    changeTaskStatus(id: $id, status: $status) {
+      id
+      name
+      description
+      openedBy
+      status
+      isOpen
+    }
+  }
+`;

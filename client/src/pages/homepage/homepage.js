@@ -3,14 +3,14 @@ import Category from '../../components/category/category';
 import { filterTasksByCategory } from '../../helper/helper-functions';
 
 const homepage = ({ tasks }) => {
-  const tasksObject = filterTasksByCategory(tasks);
+  const { open, active, finished, closed } = filterTasksByCategory(tasks);
 
   return (
     <div>
-      <Category tasks={tasksObject.open} name="Open" />
-      <Category tasks={tasksObject.active} name="Active" />
-      <Category tasks={tasksObject.finished} name="Finished" />
-      <Category tasks={tasksObject.closed} name="Closed" />
+      <Category tasks={open} name="Open" />
+      <Category tasks={active} name="Active" />
+      <Category tasks={finished} name="Finished" />
+      <Category tasks={closed} name="Closed" />
     </div>
   );
 };

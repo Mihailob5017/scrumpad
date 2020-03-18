@@ -130,7 +130,7 @@ const Mutation = new GraphQLObjectType({
         status: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(parent, args) {
-        console.log(args.id)
+      
         return Task.updateOne(
           { _id: args.id },
           { $set: { status: args.status } }
