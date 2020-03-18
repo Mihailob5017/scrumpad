@@ -29,3 +29,16 @@ export const returnIssueQuery = arg => {
   if (res === 'issues') return { query: GET_ALL_ISSUES_QUERY, id: '' };
   else return { query: GET_SPECIFIC_ISSUE_QUERY, id: res };
 };
+
+export const getAllIssues = data => {
+  let IssueArr = [];
+
+  if (Array.isArray(data.tasks)) {
+    for (let task of data.tasks) IssueArr = [...IssueArr, ...task.issues];
+  } else {
+    const { issues } = data.task;
+    IssueArr = [...issues];
+  }
+
+  return IssueArr;
+};

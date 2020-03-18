@@ -1,7 +1,11 @@
 import React from 'react';
-
-const button = () => {
-  return <div></div>;
+import { Link } from 'react-router-dom';
+const button = ({ location, name }) => {
+  return (
+    <div>
+      <Link to={location}>{name}</Link>
+    </div>
+  );
 };
 
 export default button;

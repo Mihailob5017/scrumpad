@@ -1,19 +1,20 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { returnIssueQuery } from '../../helper/helper-functions';
+import { returnIssueQuery, getAllIssues } from '../../helper/helper-functions';
 import { useQuery } from '@apollo/react-hooks';
+import Issue from './issue';
 const IssueContainer = props => {
   const { query, id } = returnIssueQuery(props.location.pathname);
   const { error, loading, data } = useQuery(query, { variables: { id } });
   if (error) {
-    return <div>error</div>;
     console.log(error);
+    return <div>error</div>;
   }
   if (loading) {
     return <div>Loading</div>;
   }
-  console.log(data);
-  return <div></div>;
+
+  return <Issue issues={getAllIssues(data)} />;
 };
 
 export default withRouter(IssueContainer);

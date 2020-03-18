@@ -63,7 +63,6 @@ const RootQuery = new GraphQLObjectType({
       type: TaskQuery,
       args: { id: { type: new GraphQLNonNull(GraphQLID) } },
       resolve(parent, args) {
-        console.log(args.id);
         return Task.findById(args.id);
       }
     },
