@@ -110,18 +110,6 @@ const Mutation = new GraphQLObjectType({
       }
     },
 
-    //Close a task
-    closeTask: {
-      type: TaskQuery,
-      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
-      resolve(parent, args) {
-        return Task.updateOne(
-          { _id: args.id },
-          { $set: { isOpen: false } }
-        );
-      }
-    },
-
     //Move from one column to another
     changeTaskStatus: {
       type: TaskQuery,
@@ -130,10 +118,14 @@ const Mutation = new GraphQLObjectType({
         status: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(parent, args) {
-      
         return Task.updateOne(
           { _id: args.id },
-          { $set: { status: args.status } }
+          {
+            $set: {
+              status: args.status,
+              isOpen: args.status === 'closed' ? false : true
+            }
+          }
         );
       }
     },
