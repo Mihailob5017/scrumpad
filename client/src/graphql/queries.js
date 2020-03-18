@@ -30,3 +30,29 @@ export const CHANGE_TASK_STATUS = gql`
     }
   }
 `;
+
+export const GET_ALL_ISSUES_QUERY = gql`
+  {
+    tasks {
+      issues {
+        name
+        description
+        isOpen
+        taskId
+      }
+    }
+  }
+`;
+
+export const GET_SPECIFIC_ISSUE_QUERY = gql`
+  query Task($id: ID!) {
+    task(id: $id) {
+      name
+      issues {
+        name
+        description
+        isOpen
+      }
+    }
+  }
+`;
