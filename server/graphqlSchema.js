@@ -152,7 +152,11 @@ const Mutation = new GraphQLObjectType({
       type: IssueQuery,
       args: { id: { type: new GraphQLNonNull(GraphQLID) } },
       resolve(parent, args) {
-        Issue.updateOne({ _id: args.id }, { $set: { isOpen: false } });
+        return Issue.findOneAndUpdate(
+          { _id: args.id },
+          { $set: { isOpen: false } }
+        );
+       
       }
     }
   }

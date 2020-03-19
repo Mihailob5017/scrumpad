@@ -1,10 +1,10 @@
 import React from 'react';
-import SingleIssue from '../../components/issue/single-issue';
-const Issue = ({ issues }) => {
+import SingleIssue from '../../components/issue/single-issue-container';
+const Issue = ({ issues, query }) => {
   return (
     <div>
-      {issues.map(({ name, description }, i) => (
-        <SingleIssue name={name} description={description} key={i} />
+      {issues.map((issue, i) => (
+        <SingleIssue query={query} {...issue} key={i} />
       ))}
     </div>
   );

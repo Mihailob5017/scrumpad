@@ -35,6 +35,7 @@ export const GET_ALL_ISSUES_QUERY = gql`
   {
     tasks {
       issues {
+        id
         name
         description
         isOpen
@@ -49,10 +50,20 @@ export const GET_SPECIFIC_ISSUE_QUERY = gql`
     task(id: $id) {
       name
       issues {
+        id
         name
         description
         isOpen
+        taskId
       }
+    }
+  }
+`;
+
+export const CLOSE_SPECIFIC_ISSUE = gql`
+  mutation CloseIssue($id: ID!) {
+    closeIssue(id: $id) {
+      name
     }
   }
 `;

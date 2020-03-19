@@ -14,7 +14,7 @@ const IssueContainer = props => {
     return <div>Loading</div>;
   }
 
-  return <Issue issues={getAllIssues(data)} />;
+  return <Issue query={query} issues={getAllIssues(data)} />;
 };
 
 export default withRouter(IssueContainer);
