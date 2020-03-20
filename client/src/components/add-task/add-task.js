@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import FormInput from '../input/input';
 const AddTask = ({ query, OpenTaskExec }) => {
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
@@ -25,36 +26,39 @@ const AddTask = ({ query, OpenTaskExec }) => {
     setUsername('');
   };
 
+  const handleChange = e => {
+    const { name, value } = e.target;
+    if (name === 'name') setName(value);
+    if (name === 'desc') setDesc(value);
+    if (name === 'user') setUsername(value);
+  };
+
   return (
     <div>
-      <label htmlFor="name">Task Name:</label>
-      <br />
-      <input
-        type="text"
+      <FormInput
+        label="Task Name:"
         name="name"
+        isTextarea={false}
+        handleChange={handleChange}
         value={name}
-        onChange={e => setName(e.target.value)}
       />
       <br />
-      <label htmlFor="desc">Task Description:</label>
-      <br />
-      <textarea
+      <FormInput
+        label="Task Desciption:"
         name="desc"
+        isTextarea={true}
+        handleChange={handleChange}
         value={desc}
-        onChange={e => setDesc(e.target.value)}
-        rows="10"
-      ></textarea>
+      />
       <br />
-      <label htmlFor="user">Your name</label>
-      <br />
-      <input
-        type="text"
+      <FormInput
+        label="Task Master:"
         name="user"
+        isTextarea={false}
+        handleChange={handleChange}
         value={username}
-        onChange={e => setUsername(e.target.value)}
       />
       <button onClick={execute}>Add Task</button>
-
       <Link to="/">Go To Homepage</Link>
     </div>
   );

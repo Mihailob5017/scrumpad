@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import FormInput from '../input/input';
 const AddIssue = ({ OpenIssue, taskId, query }) => {
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
+
+  const handleChange = e => {
+    const { name, value } = e.target;
+    if (name === 'name') setName(value);
+    if (name === 'desc') setDesc(value);
+  };
 
   const openIss = () => {
     if (name === '' || desc === '') {
@@ -18,27 +25,27 @@ const AddIssue = ({ OpenIssue, taskId, query }) => {
     };
 
     OpenIssue(obj);
-    alert('Issue Successfully added');
+
     setName('');
     setDesc('');
   };
   return (
     <div>
-      <label htmlFor="name">Issue Name:</label>
-      <input
-        type="text"
+      <FormInput
+        label="Issue name:"
         name="name"
+        isTextarea={false}
+        handleChange={handleChange}
         value={name}
-        onChange={e => setName(e.target.value)}
       />
       <br />
-      <label htmlFor="desc">Issue Description:</label>
-      <textarea
+      <FormInput
+        label="Issue description:"
         name="desc"
+        isTextarea={true}
+        handleChange={handleChange}
         value={desc}
-        onChange={e => setDesc(e.target.value)}
-        rows="10"
-      ></textarea>
+      />
       <button onClick={openIss}>Open New Issue</button>
       <Link to={`/issues/${taskId}`}>Go to Issues</Link>
     </div>
