@@ -6,6 +6,7 @@ import ApolloClient from 'apollo-boost';
 //  Components
 import Homepage from './pages/homepage/homepage-container';
 import Issuepage from './pages/issues/issue-container';
+import Addpage from './pages/add/addpage';
 //  Apollo setup
 const Client = new ApolloClient({
   uri: 'http://localhost:5000/graphql'
@@ -16,10 +17,9 @@ const App = () => {
   return (
     <ApolloProvider client={Client}>
       <Router>
-        <div>hello world</div>
-
         <Route exact path="/" component={Homepage} />
-        <Route path="/" component={Issuepage} />
+        <Route path="/issues" component={Issuepage} />
+        <Route path="/add" component={Addpage} />
       </Router>
     </ApolloProvider>
   );

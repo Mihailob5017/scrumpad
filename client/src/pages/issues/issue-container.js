@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import Issue from './issue';
 const IssueContainer = props => {
   const { query, id } = returnIssueQuery(props.location.pathname);
+  console.log(id);
   const { error, loading, data } = useQuery(query, { variables: { id } });
   if (error) {
     console.log(error);
@@ -14,7 +15,13 @@ const IssueContainer = props => {
     return <div>Loading</div>;
   }
 
-  return <Issue query={query} issues={getAllIssues(data)} />;
+  return (
+    <Issue
+      query={query}
+      isAddVisiable={id === '' ? false : true}
+      issues={getAllIssues(data)}
+    />
+  );
 };
 
 export default withRouter(IssueContainer);

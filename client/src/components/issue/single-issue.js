@@ -9,7 +9,6 @@ const SingleIssue = ({
   query,
   taskId
 }) => {
- 
   return (
     <div style={{ fontWeight: 400, border: '1px solid red', margin: '2em 0' }}>
       <h2>{name}</h2>
@@ -17,9 +16,16 @@ const SingleIssue = ({
       <h4>{description}</h4>
       <h5>Issue:{isOpen ? 'Open' : 'Closed'}</h5>
       <br />
-      <button onClick={() => closeIssueExec(id, query, taskId)}>
-        Close Issue
-      </button>
+      <h1>
+        Issue:
+        {isOpen ? (
+          <button onClick={() => closeIssueExec(id, query, taskId)}>
+            Close
+          </button>
+        ) : (
+          'Closed'
+        )}
+      </h1>
     </div>
   );
 };

@@ -19,7 +19,7 @@ export const filterTasksByCategory = allTasks => {
   return filterObj;
 };
 
-const getLastArg = (route = '/nesto/12') => {
+export const getLastArg = route => {
   const arg = route.split('/');
   return arg[arg.length - 1];
 };
