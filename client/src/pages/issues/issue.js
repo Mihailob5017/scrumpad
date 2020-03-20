@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SingleIssue from '../../components/issue/single-issue-container';
-const Issue = ({ issues, query, isAddVisiable }) => {
+const Issue = ({ taskId, issues, query, isAddVisiable }) => {
+  console.log(issues.length);
   return (
     <div>
       {issues.map((issue, i) => (
@@ -10,7 +11,7 @@ const Issue = ({ issues, query, isAddVisiable }) => {
       {isAddVisiable && (
         <Link
           style={{ border: '2px solid black', padding: '0.5em' }}
-          to={`/add/${issues[0].taskId}`}
+          to={`/add/${taskId}`}
         >
           Add new Issue
         </Link>

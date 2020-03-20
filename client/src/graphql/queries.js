@@ -34,6 +34,7 @@ export const CHANGE_TASK_STATUS = gql`
 export const GET_ALL_ISSUES_QUERY = gql`
   {
     tasks {
+      id
       issues {
         id
         name
@@ -48,7 +49,7 @@ export const GET_ALL_ISSUES_QUERY = gql`
 export const GET_SPECIFIC_ISSUE_QUERY = gql`
   query Task($id: ID!) {
     task(id: $id) {
-      name
+      id
       issues {
         id
         name

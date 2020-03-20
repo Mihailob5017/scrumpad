@@ -42,3 +42,7 @@ export const getAllIssues = data => {
 
   return IssueArr;
 };
+export const getId = data => {
+  if (Array.isArray(data.tasks)) return data.tasks[0].id;
+  else return data.task.id;
+};
