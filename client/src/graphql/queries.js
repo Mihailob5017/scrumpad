@@ -85,3 +85,23 @@ export const OPEN_NEW_ISSUE = gql`
     }
   }
 `;
+
+export const OPEN_NEW_TASK = gql`
+  mutation OpenTask(
+    $name: String
+    $description: String
+    $openedBy: String
+    $status: String
+    $isOpen: Boolean
+  ) {
+    openTask(
+      name: $name
+      description: $description
+      openedBy: $openedBy
+      status: $status
+      isOpen: $isOpen
+    ) {
+      name
+    }
+  }
+`;

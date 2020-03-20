@@ -31,6 +31,7 @@ const AddIssue = ({ OpenIssue, taskId, query }) => {
         value={name}
         onChange={e => setName(e.target.value)}
       />
+      <br />
       <label htmlFor="desc">Issue Description:</label>
       <textarea
         name="desc"
