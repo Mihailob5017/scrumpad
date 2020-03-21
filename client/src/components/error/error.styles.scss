@@ -1,0 +1,19 @@
+.error_container {
+  margin: auto;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 10px solid #a01c07;
+  padding: 1rem 0;
+}
+.error_header {
+  font-weight: 500;
+  color: #a01c07;
+  text-shadow: 0.5px 0.5px 0.5px black;
+  margin-bottom: 0;
+}
+.error_body {
+  font-weight: 400;
+  margin-bottom: 2rem;
+}

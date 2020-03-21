@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import CustomBtn from '../button/button';
 import FormInput from '../input/input';
 const AddIssue = ({ OpenIssue, taskId, query }) => {
   const [name, setName] = useState('');
@@ -46,8 +46,12 @@ const AddIssue = ({ OpenIssue, taskId, query }) => {
         handleChange={handleChange}
         value={desc}
       />
-      <button onClick={openIss}>Open New Issue</button>
-      <Link to={`/issues/${taskId}`}>Go to Issues</Link>
+      <CustomBtn isLink={false} executable={openIss}>
+        Add Issue
+      </CustomBtn>
+      <CustomBtn isLink={true} location="/issues">
+        View All Issues
+      </CustomBtn>
     </div>
   );
 };

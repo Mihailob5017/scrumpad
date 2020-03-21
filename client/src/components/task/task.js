@@ -13,7 +13,9 @@ const task = ({ id, name, description, openedBy, status }) => {
       <div>Desc: {description}</div>
       <br />
       <Status status={status} id={id} />
-      <CustomBtn name="View Issues" location={`/issues/${id}`} />
+      <CustomBtn isLink={true} location={`/issues/${id}`}>
+        View Issues
+      </CustomBtn>
     </div>
   );
 };

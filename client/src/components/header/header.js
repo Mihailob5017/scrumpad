@@ -1,13 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import CustomButton from '../button/button';
 const header = () => {
   return (
     <div>
       <h1>Scrumpad</h1>
 
-      <Link to="/">Home Page</Link>
-      <Link to="/issues">All Issues</Link>
-      <Link to="/add">Add Task</Link>
+      <CustomButton isLink={true} location="/">
+        Home Page
+      </CustomButton>
+      <CustomButton isLink={true} location="/issues">
+        All Issues
+      </CustomButton>
+      <CustomButton isLink={true} location="/add">
+        Add Task
+      </CustomButton>
     </div>
   );
 };

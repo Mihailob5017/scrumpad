@@ -1,0 +1,16 @@
+.button-component_container {
+  .button-link_container {
+    font-weight: 500;
+    
+    .button-link_link {
+      text-decoration: none;
+      color: black;
+      transition: 300ms;
+      &:hover {
+        color: royalblue;
+      }
+    }
+  }
+  .button_component_btn {
+  }
+}

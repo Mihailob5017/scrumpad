@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import CustomBtn from '../button/button';
 import FormInput from '../input/input';
 const AddTask = ({ query, OpenTaskExec }) => {
   const [name, setName] = useState('');
@@ -20,7 +20,6 @@ const AddTask = ({ query, OpenTaskExec }) => {
       query: query
     };
     OpenTaskExec(object);
-    alert('Task Successfuly Added');
     setName('');
     setDesc('');
     setUsername('');
@@ -58,8 +57,10 @@ const AddTask = ({ query, OpenTaskExec }) => {
         handleChange={handleChange}
         value={username}
       />
-      <button onClick={execute}>Add Task</button>
-      <Link to="/">Go To Homepage</Link>
+      <CustomBtn isLink={false} executable={execute}>
+        Add Task
+      </CustomBtn>
+      <CustomBtn isLink={true} location="/">View All Tasks</CustomBtn>
     </div>
   );
 };

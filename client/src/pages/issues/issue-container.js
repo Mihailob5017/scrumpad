@@ -7,17 +7,14 @@ import {
 } from '../../helper/helper-functions';
 import { useQuery } from '@apollo/react-hooks';
 import Issue from './issue';
+//  Loader & Error
+import Loader from '../../components/loader/loader';
+import Error from '../../components/error/error';
 const IssueContainer = props => {
   const { query, id } = returnIssueQuery(props.location.pathname);
   const { error, loading, data } = useQuery(query, { variables: { id } });
-  if (error) {
-    console.log(error);
-    return <div>error</div>;
-  }
-  if (loading) {
-    return <div>Loading</div>;
-  }
-  console.log(data);
+  if (loading) return <Loader />;
+  if (error) return <Error error={error} />;
   return (
     <Issue
       query={query}
