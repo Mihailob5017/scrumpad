@@ -5,19 +5,20 @@ import './task.style.scss';
 
 const task = ({ id, name, description, openedBy, status }) => {
   return (
-    <div style={{ border: '1px solid black', margin: '1em 0' }}>
-      <h1>
-        Name:{name}Posted By:{openedBy}
-      </h1>
-      <br />
-      <div>Desc: {description}</div>
-      <br />
-      <Status status={status} id={id} />
-      <CustomBtn isLink={true} location={`/issues/${id}`}>
-        View Issues
-      </CustomBtn>
+    <div className="task-component_container">
+      <div className="task-component_header">
+        <h2>Name:{name}</h2>
+        <h2>Posted By:{openedBy}</h2>
+      </div>
+
+      <div className="task-component_body">Description: {description}</div>
+      <div className="task-component_footer">
+        <Status status={status} id={id} />
+        <CustomBtn isLink={true} location={`/issues/${id}`}>
+          View Issues
+        </CustomBtn>
+      </div>
     </div>
   );
 };
-
 export default task;

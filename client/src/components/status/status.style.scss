@@ -1,0 +1,11 @@
+.status_container {
+  font-size: 1.2rem;
+  border: 0.5px solid royalblue;
+  border-radius: 3px;
+  color: #333;
+  .status_option {
+    &:hover {
+      background: royalblue;
+    }
+  }
+}
