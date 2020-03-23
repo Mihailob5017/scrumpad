@@ -18,6 +18,11 @@ const SingleIssue = ({
           : 'single-issue-container__closed'
       }
     >
+      {!isOpen && (
+        <div className="issue-component-overlay">
+          <h1 className="overlay-txt">Closed</h1>
+        </div>
+      )}
       <div className="single-issue-header">
         <h2 className="single-issue-head">Issue name:{name}</h2>
         <h2 className="single-issue-status__body">
