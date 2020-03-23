@@ -11,7 +11,7 @@ const category = props => {
         {tasks.length > 0 ? (
           tasks.map((task, i) => <Task key={i} {...task} />)
         ) : (
-          <Empty />
+          <Empty>Tasks</Empty>
         )}
       </div>
     </div>

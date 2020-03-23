@@ -1,5 +1,6 @@
 import React from 'react';
-
+import CustomButton from '../button/button';
+import './single-issue.style.scss';
 const SingleIssue = ({
   name,
   description,
@@ -10,22 +11,33 @@ const SingleIssue = ({
   taskId
 }) => {
   return (
-    <div style={{ fontWeight: 400, border: '1px solid red', margin: '2em 0' }}>
-      <h2>{name}</h2>
-      <br />
-      <h4>{description}</h4>
-      <h5>Issue:{isOpen ? 'Open' : 'Closed'}</h5>
-      <br />
-      <h1>
-        Issue:
+    <div
+      className={
+        isOpen
+          ? 'single-issue-container__open'
+          : 'single-issue-container__closed'
+      }
+    >
+      <div className="single-issue-header">
+        <h2 className="single-issue-head">Issue name:{name}</h2>
+        <h2 className="single-issue-status__body">
+          Issue Status:{isOpen ? 'Open' : 'Closed'}
+        </h2>
+      </div>
+      <div className="single-issue-body">{description}</div>
+      <div className="single-issue-footer">
+        <h1 className="single-issue-status__footer">Close Issue:</h1>
         {isOpen ? (
-          <button onClick={() => closeIssueExec(id, query, taskId)}>
-            Close
-          </button>
+          <CustomButton
+            isLink={false}
+            executable={() => closeIssueExec(id, query, taskId)}
+          >
+            Close Issue
+          </CustomButton>
         ) : (
-          'Closed'
+          <h1>Closed</h1>
         )}
-      </h1>
+      </div>
     </div>
   );
 };
