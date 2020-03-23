@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CustomBtn from '../button/button';
 import FormInput from '../input/input';
 import './add-issue.style.scss';
-const AddIssue = ({ OpenIssue, taskId, query }) => {
+const AddIssue = ({ color, OpenIssue, taskId, query }) => {
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
 
@@ -33,7 +33,7 @@ const AddIssue = ({ OpenIssue, taskId, query }) => {
   return (
     <div className="add-issue-container">
       <FormInput
-        inputColor="firebrick"
+        inputColor={color}
         label="Issue name:"
         placeholder="Add the Name of the Issue"
         name="name"
@@ -43,7 +43,7 @@ const AddIssue = ({ OpenIssue, taskId, query }) => {
       />
       <br />
       <FormInput
-        inputColor="firebrick"
+        inputColor={color}
         label="Issue description:"
         placeholder="Add the Issue Description"
         name="desc"

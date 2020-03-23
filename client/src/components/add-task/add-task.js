@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './add-task.style.scss';
 import CustomBtn from '../button/button';
 import FormInput from '../input/input';
-const AddTask = ({ query, OpenTaskExec }) => {
+const AddTask = ({ color, query, OpenTaskExec }) => {
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
   const [username, setUsername] = useState('');
@@ -36,7 +36,7 @@ const AddTask = ({ query, OpenTaskExec }) => {
   return (
     <div className="task-container">
       <FormInput
-        inputColor="royalblue"
+        inputColor={color}
         label="Task Name:"
         placeholder="Add the name of the task"
         name="name"
@@ -46,7 +46,7 @@ const AddTask = ({ query, OpenTaskExec }) => {
       />
       <br />
       <FormInput
-        inputColor="royalblue"
+        inputColor={color}
         label="Task Desciption:"
         placeholder="Add the description of the task"
         name="desc"
@@ -56,7 +56,7 @@ const AddTask = ({ query, OpenTaskExec }) => {
       />
       <br />
       <FormInput
-        inputColor="royalblue"  
+        inputColor={color}
         label="Task Master:"
         name="user"
         placeholder="Add the username of the taskmaster"

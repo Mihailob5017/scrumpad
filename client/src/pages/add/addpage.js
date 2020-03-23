@@ -6,7 +6,15 @@ import AddTask from '../../components/add-task/add-task-container';
 const AddPage = props => {
   const Route = getLastArg(props.location.pathname);
 
-  return <>{Route === 'add' ? <AddTask /> : <AddIssue taskId={Route} />}</>;
+  return (
+    <>
+      {Route === 'add' ? (
+        <AddTask color="royalblue" />
+      ) : (
+        <AddIssue color="firebrick" taskId={Route} />
+      )}
+    </>
+  );
 };
 
 export default withRouter(AddPage);
