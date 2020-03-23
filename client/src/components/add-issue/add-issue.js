@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CustomBtn from '../button/button';
 import FormInput from '../input/input';
+import './add-issue.style.scss';
 const AddIssue = ({ OpenIssue, taskId, query }) => {
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
@@ -30,9 +31,11 @@ const AddIssue = ({ OpenIssue, taskId, query }) => {
     setDesc('');
   };
   return (
-    <div>
+    <div className="add-issue-container">
       <FormInput
+        inputColor="firebrick"
         label="Issue name:"
+        placeholder="Add the Name of the Issue"
         name="name"
         isTextarea={false}
         handleChange={handleChange}
@@ -40,7 +43,9 @@ const AddIssue = ({ OpenIssue, taskId, query }) => {
       />
       <br />
       <FormInput
+        inputColor="firebrick"
         label="Issue description:"
+        placeholder="Add the Issue Description"
         name="desc"
         isTextarea={true}
         handleChange={handleChange}

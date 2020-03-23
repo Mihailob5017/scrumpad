@@ -1,0 +1,24 @@
+.form-input__container {
+  width: 100%;
+
+  .label {
+    font-size: 1.5rem;
+    padding-left: 1em;
+  }
+
+  .form-input__input {
+    margin-top: 1em;
+    font-size: 1.5rem;
+    width: 99%;
+    border: none;
+    outline: none;
+  }
+
+  .form-input__textarea {
+    margin-top: 1em;
+    font-size: 1.2rem;
+    width: 99%;
+    height: 150px;
+    resize: none;
+  }
+}

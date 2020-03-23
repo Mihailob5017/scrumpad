@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './add-task.style.scss';
 import CustomBtn from '../button/button';
 import FormInput from '../input/input';
 const AddTask = ({ query, OpenTaskExec }) => {
@@ -33,9 +34,11 @@ const AddTask = ({ query, OpenTaskExec }) => {
   };
 
   return (
-    <div>
+    <div className="task-container">
       <FormInput
+        inputColor="royalblue"
         label="Task Name:"
+        placeholder="Add the name of the task"
         name="name"
         isTextarea={false}
         handleChange={handleChange}
@@ -43,7 +46,9 @@ const AddTask = ({ query, OpenTaskExec }) => {
       />
       <br />
       <FormInput
+        inputColor="royalblue"
         label="Task Desciption:"
+        placeholder="Add the description of the task"
         name="desc"
         isTextarea={true}
         handleChange={handleChange}
@@ -51,8 +56,10 @@ const AddTask = ({ query, OpenTaskExec }) => {
       />
       <br />
       <FormInput
+        inputColor="royalblue"  
         label="Task Master:"
         name="user"
+        placeholder="Add the username of the taskmaster"
         isTextarea={false}
         handleChange={handleChange}
         value={username}
@@ -60,7 +67,9 @@ const AddTask = ({ query, OpenTaskExec }) => {
       <CustomBtn isLink={false} executable={execute}>
         Add Task
       </CustomBtn>
-      <CustomBtn isLink={true} location="/">View All Tasks</CustomBtn>
+      <CustomBtn isLink={true} location="/">
+        View All Tasks
+      </CustomBtn>
     </div>
   );
 };
