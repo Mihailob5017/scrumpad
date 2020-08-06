@@ -1,16 +1,16 @@
-import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { ApolloProvider } from '@apollo/react-hooks';
-import ApolloClient from 'apollo-boost';
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { ApolloProvider } from "@apollo/react-hooks";
+import ApolloClient from "apollo-boost";
 
 //  Components
-import Homepage from './pages/homepage/homepage-container';
-import Issuepage from './pages/issues/issue-container';
-import Addpage from './pages/add/addpage';
-import Header from './components/header/header';
+import Homepage from "./pages/homepage/homepage-container";
+import Issuepage from "./pages/issues/issue-container";
+import Addpage from "./pages/add/addpage";
+import Header from "./components/header/header";
 //  Apollo setup
 const Client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql'
+  uri: "https://scrumpad-backend.herokuapp.com/graphql",
 });
 
 //  App

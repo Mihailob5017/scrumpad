@@ -1,6 +1,5 @@
 .category-component_container {
   width: 24%;
-
   .category-component_header {
     text-align: center;
     color: royalblue;
@@ -31,4 +30,5 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
+  overflow-x: hidden;
 }
